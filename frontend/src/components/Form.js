@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+
+// REACT FORM: FILES UPLOAD TO THE SERVER
+
 const Form = () => {
 	const [name, setName] = useState("");
 	const [image, setImage] = useState();

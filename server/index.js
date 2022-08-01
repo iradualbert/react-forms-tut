@@ -1,26 +1,47 @@
-// forms
-// save file in the folder in the name
-
-const express = require('express');
-const fileUpload = require('express-fileupload');
+const express = require("express");
+const fileUpload = require("express-fileupload");
 const cors = require("cors");
 
+const PORT = process.PORT || 5000;
 
 const app = express();
 
-app.use(fileUpload())
-app.use(cors())
+app.use(fileUpload());
+app.use(cors());
 
-app.post('/upload', (req, res) => {
-    console.log(req.files)
-    // if (req.files === null) {
-    //     return res.status(400).json({
-    //         msg: 'Files are required'
-    //     })
-    // }
-    const files = req.files
-    
-    res.json({ status : "ok"})
-})
+const users = [];
 
-app.listen(5000, () => console.log('Server started....'))
+const validateUser = (user) => {};
+
+app.post("/register", (req, res) => {
+  const { username, email, password } = req.body;
+  if (username && email && password) {
+    // if the user already exists
+    // else create a new user
+    res.status(201).json({
+      username,
+      email,
+      message: "Account Created Successfully",
+    });
+  } else {
+    const errors = {};
+    if (!fullname) {
+      errors["username"] = "Enter your username";
+      errors["email"] = "Enter your username";
+      errors["password"] = "Enter your username";
+      errors["check-box"] = "Enter your username";
+    }
+  }
+});
+
+app.post("/upload", (req, res) => {
+  if (req.files?.Image === undefined){
+    res.status(400).send({ message: "Please upload a file!" });
+    return;
+  } 
+  res.status(200).send({
+    message: `${req.files.Image.name}: Uploaded the file successfully`
+  });
+});
+
+app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));

@@ -1,7 +1,10 @@
 import { useState, useRef } from "react";
 import axios from "axios";
 
-const ImageUploader = () => {
+
+// REACT FORM: IMAGE UPLOAD TO THE SERVER 
+// make it resuable 
+const ImageUploader = ({ value, onChange }) => {
   const [image, setImage] = useState();
   const [files, setFiles] = useState();
   const [isLoading, setIsLoading] = useState(false);

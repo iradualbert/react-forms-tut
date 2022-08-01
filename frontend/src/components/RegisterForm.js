@@ -2,6 +2,9 @@ import { useState } from "react";
 import countries from "./countries";
 import ImageUpload from "./ImageUploader";
 
+
+// REACT FORM: HANDLING FORM AND SUBMITTING FORM TO THE SERVER 
+
 const RegisterForm = () => {
 	const [fullname, setFullname] = useState("");
 	const [email, setEmail] = useState("");
