@@ -6,27 +6,30 @@ const Uploader = () => {
   const [isLoading, setIsLoading] = useState(false);
   const inputRef = useRef();
 
-  const handleSubmit = async() => {
-    try{
-      setIsLoading(true)
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
       const formData = new FormData();
-      formData.append("Image", images[0])
+      formData.append("Image", images[0]);
       // const res = await fetch('http://localhost:5000/upload', {
       //   method: "POST",
       //   body: formData
       // })
       // const data = await res.json();
-      
-      const { data } = await axios.post("http://localhost:5000/upload", formData);
+
+      const { data } = await axios.post(
+        "http://localhost:5000/upload",
+        formData
+      );
 
       console.log(data);
-      alert(data.message)
+      alert(data.message);
       setImages(null);
       inputRef.current.value = "";
-    } catch(err){
-      console.log(err)
-    } finally{
-      setIsLoading(false)
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,40 +43,30 @@ const Uploader = () => {
         accept="image/*"
         ref={inputRef}
       />
-      {images ? (
+      {images?.length ? (
         <>
-          <div className="images" style={styles.images}>
+          <div className="img-preview">
             {Array.from(images).map((image, index) => (
-              <img
-                style={styles.img}
-                src={URL.createObjectURL(image)}
-                key={index}
-                alt=""
-              />
+              <img src={URL.createObjectURL(image)} key={index} alt="" />
             ))}
           </div>
-          <button onClick={handleSubmit} disabled={isLoading}>Upload</button>
-          <button onClick={() => inputRef.current.click()}>Change</button>
+          <div className="actions">
+            <button
+              disabled={isLoading}
+              onClick={() => inputRef.current.click()}
+            >
+              Change
+            </button>
+            <button onClick={handleSubmit} disabled={isLoading}>
+              Upload
+            </button>
+          </div>
         </>
       ) : (
         <button onClick={() => inputRef.current.click()}>Chose Images</button>
-      )
-    
-    }
+      )}
     </>
   );
-};
-
-const styles = {
-  images: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  img: {
-    border: "1px solid black",
-    width: "200px",
-    height: "auto"
-  },
 };
 
 export default Uploader;

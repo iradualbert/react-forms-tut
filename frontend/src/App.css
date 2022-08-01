@@ -13,6 +13,13 @@ body {
 	justify-content: center;
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 800px;
+}
+
 h1 {
 	margin: 10px 0;
 }
@@ -25,9 +32,10 @@ form {
 	padding: 20px;
 }
 
+h1 { text-align: center;}
+
 form > h1 {
 	margin-bottom: 48px;
-	text-align: center;
 }
 
 .form-group {
@@ -42,11 +50,20 @@ label {
 
 input, select, button {
   border: 2px solid #d4d0d0;
-  padding: 12px;
-  font-size: 16px;
-  margin: 10px 0 15px 0;
+  padding: 8px;
+  font-size: 20px;
+  margin: 10px 0 10px 0;
   width: 100%;
   border-radius: 6px;
+}
+
+button {
+	background-color: #1a1c2e;
+	color: white;
+	border-radius: 20px;
+}
+button:disabled {
+	background-color:#d4d0d0
 }
 
 input[type="checkbox"] {
@@ -56,13 +73,11 @@ input[type="checkbox"] {
   margin-right: 10px;
 }
 
-form > button {
-	background-color: rgb(108, 108, 170)
-}
+
 
 input:focus, select:focus, button:focus{
 	outline: none;
-	border: 2px solid rgb(108, 108, 170);
+	border: 2px solid #818cf8;
 }
 
 pre {
@@ -70,3 +85,25 @@ pre {
 	font-size: 20px;
 }
 
+
+.img-preview {
+	display: flex;
+	margin: 12px 0;
+	flex-wrap: wrap;
+} 
+
+.img-preview > img {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	padding: 12px;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-around;
+}
+
+.actions > button {
+	max-width: 300px;
+}

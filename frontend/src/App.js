@@ -6,12 +6,12 @@ import Uploader from "./components/Uploader";
 
 const App = () => {
 	return (
-		<>
+		<div className="container">
 			{/* <ImageUploader /> */}
 			{/* <RegisterForm /> */}
 			{/* <ImageUploader /> */}
 			<Uploader />
-		</>
+		</div>
 	);
 };
 
