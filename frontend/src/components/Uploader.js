@@ -18,7 +18,7 @@ const Uploader = () => {
       // const data = await res.json();
 
       const { data } = await axios.post(
-        "http://localhost:5000/upload",
+        "http://localhost:5000/uploads",
         formData
       );
 
