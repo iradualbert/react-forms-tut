@@ -1,42 +1,44 @@
 // import "./App.css";
-import { useState } from "react";
-import Form from "./components/Form";
-import RegisterForm from "./components/RegisterForm";
-import ImageUploader from "./components/ImageUploader";
-import Uploader from "./components/Uploader";
-import PasswordField from "./components/fields/PasswordField";
-
-const lowerReg = /(?=.*?[a-z])/;
-const upperReg = /(?=.*?[A-Z])/;
-const numberReg = /(?=.*?[0-9])/;
-const specialReg = /(?=.*?[#?!@$%^&*-])/;
-const lengthReg = /.{8,}/;
+import { useState, useRef } from "react";
+// import Uploader from "./components/Uploader";
+// import ImageUploader from "./components/ImageUploader";
+import CodeVerification from "./components/VerificationInput/VerificationInput";
 
 const App = () => {
-  const [password, setPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [username, setUsername] = useState("");
+  const [code, setCode] = useState("");
+  const [isCodeInvalid, setIsCodeInvalid] = useState(false);
+  const formRef = useRef();
+  const LENGTH = 6;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (code !== "234224") {
+      setIsCodeInvalid(true);
+    }
+  };
+
+  const handleChange = value => {
+    setCode(value);
+    setIsCodeInvalid(false);
+  }
 
   return (
     <div className="container">
-      <form>
-        <input
-          name="name"
-          placeholder="Username"
-		  value={username}
-		  onChange={event => setUsername(event.target.value)}
-          style={{ marginBottom: 20 }}
+      <form onSubmit={handleSubmit} ref={formRef}>
+        <h2 style={{ textAlign: "center" }}>Verification Code</h2>
+        <CodeVerification
+          formRef={formRef}
+          isCodeInvalid={isCodeInvalid}
+          code={code}
+          LENGTH={6}
+          onChange={handleChange}
         />
-        <PasswordField
-          value={password}
-          setIsPasswordValid={setIsPasswordValid}
-		  onChange={(event) => setPassword(event.target.value)}
-        />
-		<button type="submit" disabled={!isPasswordValid || !username}>
-			Submit
-		</button>
+        <button type="submit" disabled={code.length < LENGTH}>
+          Verify
+        </button>
       </form>
+      {/* <Uploader /> */}
+      {/* <ImageUploader /> */}
     </div>
   );
 };
